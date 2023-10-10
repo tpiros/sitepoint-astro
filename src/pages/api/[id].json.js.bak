@@ -1,0 +1,29 @@
+import { getCityData, addCity } from './fake-db.js';
+
+export const GET = async ({ params }) => {
+  const { id } = params;
+  const cityData = await getCityData(id);
+  return new Response(JSON.stringify(cityData), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
+export const POST = async ({ request }) => {
+  if (!request.headers.get('Authorization')) {
+    return new Response(null, { status: 401 });
+  }
+  const body = await request.json();
+  const city = body.city;
+  await addCity(city);
+  return new Response(
+    JSON.stringify({
+      message: 'City added',
+    }),
+    {
+      status: 201,
+    }
+  );
+};

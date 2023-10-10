@@ -1,0 +1,17 @@
+---
+const { destination } = Astro.params;
+
+export function getStaticPaths() {
+  const destinations = [
+    'london',
+    'rome',
+    'sanfrancisco',
+    'singapore',
+    'cairo',
+    'medellin',
+  ];
+  // ☝🏼 remember, since this is JavaScript is executed on the server, we could pull this data from a REST API endpoint as well
+  return destinations.map((destination) => ({ params: { destination } }));
+}
+---
+<h1>Welcome to, {destination}</h1>

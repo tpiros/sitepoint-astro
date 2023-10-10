@@ -1,0 +1,21 @@
+---
+import Head from './Head.astro';
+import Navbar from './Navbar.astro';
+const {
+  title = 'My Astro Site',
+  description = 'A wonderfully crafted website',
+} = Astro.props;
+
+import Footer from './Footer.astro';
+---
+
+<html lang="en">
+  <Head {title} {description} />
+  <body>
+    <Navbar />
+      <main>
+        <slot />
+      </main>
+    <Footer />
+  </body>
+</html>

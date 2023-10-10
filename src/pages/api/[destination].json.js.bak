@@ -1,0 +1,30 @@
+const destinations = [
+  'london',
+  'rome',
+  'sanfrancisco',
+  'singapore',
+  'cairo',
+  'medellin',
+];
+
+export const GET = ({ params }) => {
+  const { destination } = params;
+  const [myDestination] = destinations.filter(
+    (destination) => destination === destination
+  );
+  return new Response(
+    JSON.stringify({
+      destination: myDestination,
+    })
+  );
+};
+
+export function getStaticPaths() {
+  return destinations.map((destination) => {
+    return {
+      params: {
+        destination,
+      },
+    };
+  });
+}

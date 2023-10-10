@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+const allDevPosts = await getCollection('devblog');
+const allCorporatePosts = await getCollection('corporateblog');
+
+// import { getEntry } from 'astro:content';
+
+// const singleEntry = await getEntry('corporateblog', 'pr-article-1');
+// import { getCollection, getEntries } from 'astro:content';
+// const getCollectionTest = await getCollection('blog');
+// getCollectionTest
+// const getEntriesTest = await getEntries('blog', 'relatedPosts');
+---
+<Layout>
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h2 class="text-3xl font-bold">Dev Posts</h1>
+        <ul class="py-6">
+          {allDevPosts.map(devPost => {
+            return (
+              <li>{devPost.data.title}</li>
+            )
+          })}
+        </ul>
+        <h2 class="text-3xl font-bold">Corporate Posts</h1>
+          <ul class="py-6">
+            {allCorporatePosts.map(corpPost => {
+              return (
+                <li>{corpPost.data.title}</li>
+              )
+            })}
+          </ul>
+      </div>
+    </div>
+  </div>
+</Layout>
