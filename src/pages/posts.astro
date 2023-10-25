@@ -20,7 +20,7 @@ const allCorporatePosts = await getCollection('corporateblog');
         <ul class="py-6">
           {allDevPosts.map(devPost => {
             return (
-              <li>{devPost.data.title}</li>
+              <li><a href={`posts/${devPost.slug}`}>{devPost.data.title}</a></li>
             )
           })}
         </ul>
