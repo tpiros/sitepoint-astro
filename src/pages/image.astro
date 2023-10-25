@@ -2,6 +2,19 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import spain from '../images/spain.jpeg';
+import { v2 as cloudinary, config } from 'cloudinary';
+config({ 
+  cloud_name: 'tamas-demo', 
+  api_key: import.meta.env.CLOUDINARY_API_KEY, 
+  api_secret: import.meta.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
+
+const cloudinaryImage = cloudinary.image("r6bswlzed6oisy4bu4sb", {transformation: [
+  {width: 800, crop: "scale"},
+  {color: "#ff0", overlay: {font_family: "Roboto", font_size: 70, font_weight: "bold", text: "Munich, Germany"}},
+  {flags: "layer_apply", gravity: "south", y: 20}
+]})
 ---
 <Layout>
   <div class="hero min-h-screen bg-base-200">
@@ -10,6 +23,8 @@ import spain from '../images/spain.jpeg';
         <h1 class="text-5xl font-bold">Image</h1>
         <div class="py-6">
           <Image src={spain} width={400} alt="Spain" />
+        </div>
+          <div class="py-6" set:html={cloudinaryImage}></div>
         </div>
       </div>
     </div>
